@@ -1,4 +1,4 @@
-# Dicoding Collection Dashboard ✨
+# Cara Menjalankan Streamlit
 
 ## Setup Environment - Anaconda
 ```
