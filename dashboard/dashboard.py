@@ -32,7 +32,7 @@ with st.sidebar:
     )
 
 #load data
-df = pd.read_csv('/day_clean.csv')
+df = pd.read_csv('dashboard/day_clean.csv')
 df = pd.DataFrame(df)
 df = df[(df['mnth']==filter_bulan)|(df['season']==filter_musim)|(df['weathersit']==filter_cuaca)]
 
