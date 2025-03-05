@@ -3,9 +3,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import streamlit as st
 
+#Judul dashboar
 st.title('Dashboard Penyewaan Sepeda')
 st.divider()
 
+#Sidebar dashboar
 with st.sidebar:
 
     #judul sidebar
@@ -34,19 +36,8 @@ with st.sidebar:
         options=['Semua pengguna', 'Pengguna tidak terdaftar', 'Pengguna terdaftar'],
     )
 
-    #filter berdasarkan hari libur/ tanggal merah
-    st.divider()
-    filter_holiday = st.radio(
-        "Berdasarkan hari libur",
-        options=['Tanggal merah', 'Tanggal biasa'],
-    )
 
-def hari_libur():
-    if filter_holiday=='Tanggal merah':
-        return 1
-    else:
-        return 0
-
+#Fungsi untuk mengubah tipe penyewa
 def filter_penyewa():
     if filter_tipe == 'Semua pengguna':
         return 'cnt'
@@ -68,7 +59,7 @@ df = df.sort_values(by = "mnth")
 df['holiday'] = df['holiday'].astype('Int64')
 
 #membuat data bisa difilter secara dinamis sesuai hari
-df = df[(df['weekday'].isin(filter_hari))|(df['holiday']==hari_libur())]
+df = df[df['weekday'].isin(filter_hari)]
 
 
 #visualisasi tingkat pertumbuhan jumlah penyewaan sepeda tiap bulan pada tahun 2011 dan 2012 
