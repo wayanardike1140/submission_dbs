@@ -56,7 +56,7 @@ def filter_penyewa():
         return 'registered'
 
 #load data
-df = pd.read_csv('./day_clean.csv')
+df = pd.read_csv('/dashboard/day_clean.csv')
 df = pd.DataFrame(df)
 
 #mengurutkan data berdasarkan bulan
