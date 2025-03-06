@@ -87,9 +87,11 @@ st.divider()
 st.subheader('Jumlah penyewaan sepeda terbaik berdasarkan musim')
 fig_musim = plt.figure(figsize=(10, 5))
 plt.title('Jumlah penyewaan sepeda terbaik berdasarkan musim')
-sns.barplot(df, x='season', y=filter_penyewa())
+ax = sns.barplot(df, x='season', y='cnt', estimator='sum')
+ax.bar_label(ax.containers[0], fontsize=10)
 plt.xlabel('Musim')
 plt.ylabel('Total penyewaan')
+plt.ticklabel_format(style='plain', axis='y')
 plt.show()
 
 st.pyplot(fig_musim)
@@ -99,8 +101,10 @@ st.divider()
 st.subheader('Peningkatan jumlah penyewaan sepeda berdasarkan cuaca')
 fig_cuaca = plt.figure(figsize=(10, 5))
 plt.title('Peningkatan jumlah penyewaan sepeda berdasarkan cuaca')
-sns.barplot(df, x='weathersit', y=filter_penyewa())
+ax = sns.barplot(df, x='weathersit', y='cnt', estimator='sum')
+ax.bar_label(ax.containers[0], fontsize=10)
 plt.xlabel('Cuaca')
+plt.ticklabel_format(style='plain', axis='y')
 plt.ylabel('Total penyewaan casual')
 plt.show()
 
@@ -108,13 +112,23 @@ st.pyplot(fig_cuaca)
 st.divider()
 
 #visualisasi peningkatan penyewa sepeda berdasarkan hari kerja
+
 st.subheader('Peningkatan penyewa sepeda berdasarkan hari kerja')
+
+tipePengguna = df.melt(
+    id_vars='workingday', value_vars=['casual', 'registered'], 
+    var_name='tipe_pengguna', value_name='total')
+
 fig_workingday = plt.figure(figsize=(10, 5))
 plt.title('Peningkatan penyewa sepeda berdasarkan hari kerja')
-sns.barplot(df, x='workingday', y=filter_penyewa())
+ax = sns.barplot(tipePengguna, x='workingday', y='total', hue='tipe_pengguna', estimator='sum')
+ax.bar_label(ax.containers[0], fontsize=10)
+ax.bar_label(ax.containers[1], fontsize=10)
 plt.xlabel('Hari Bekerja')
+plt.ticklabel_format(style='plain', axis='y')
 plt.ylabel('Total penyewaan casual')
 plt.show()
+
 
 st.pyplot(fig_workingday)
 st.divider()
@@ -135,8 +149,10 @@ st.divider()
 st.subheader('Jumlah penyewaan sepeda terbaik berdasarkan kategori suhu')
 fig_suhu=plt.figure(figsize=(10, 5))
 plt.title('Jumlah penyewaan sepeda terbaik berdasarkan kategori suhu')
-sns.barplot(df, x='temp category', y=filter_penyewa())
+ax = sns.barplot(df, x='temp category', y='cnt', estimator='sum')
+ax.bar_label(ax.containers[0], fontsize=10)
 plt.xlabel('Kategori suhu')
+plt.ticklabel_format(style='plain', axis='y')
 plt.ylabel('Total penyewaan')
 plt.show()
 
